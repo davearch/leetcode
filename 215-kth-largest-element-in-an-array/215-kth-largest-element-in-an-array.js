@@ -4,6 +4,10 @@
  * @return {number}
  */
 var findKthLargest = function(nums, k) {
+    /**
+     * Time complexity: O(N) in the average case, O(N^2) in the worst case.
+     * Space complexity: O(1).
+     */
     return quickSelect(nums, 0, nums.length - 1, k);
 };
 
