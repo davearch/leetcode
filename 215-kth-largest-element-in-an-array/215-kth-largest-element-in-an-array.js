@@ -7,6 +7,9 @@ var findKthLargest = function(nums, k) {
     /**
      * Time complexity: O(N) in the average case, O(N^2) in the worst case.
      * Space complexity: O(1).
+     *
+     * Basically a modified QuickSort but instead of sorting both sides
+     * of the pivot element, you just find the side that contains k.
      */
     return quickSelect(nums, 0, nums.length - 1, k);
 };
