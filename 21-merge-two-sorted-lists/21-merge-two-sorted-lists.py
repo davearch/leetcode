@@ -23,5 +23,6 @@ class Solution:
                 prev.next = list2
                 list2 = list2.next
             prev = prev.next
-        prev.next = list1 if list1 is not None else list2
+        # at least one of list1 and list2 can still have nodes at this point
+        prev.next = list1 or list2
         return prehead.next
