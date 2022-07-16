@@ -6,16 +6,8 @@
 #         self.right = right
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        if not root:
+        if root is None:
             return None
-        
-        queue = collections.deque([root])
-        while queue:
-            curr = queue.popleft()
-            curr.left, curr.right = curr.right, curr.left
-            
-            if curr.left:
-                queue.append(curr.left)
-            if curr.right:
-                queue.append(curr.right)
+        root.left, root.right = \
+            self.invertTree(root.right), self.invertTree(root.left)
         return root
