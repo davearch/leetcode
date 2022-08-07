@@ -10,8 +10,9 @@ class Solution:
         
         curr = head
         
-        while curr:
-            while curr.next and curr.val == curr.next.val:
+        while curr and curr.next:
+            if curr.val == curr.next.val:
                 curr.next = curr.next.next
-            curr = curr.next
+            else:
+                curr = curr.next
         return head
