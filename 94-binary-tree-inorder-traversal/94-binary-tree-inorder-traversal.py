@@ -8,12 +8,13 @@ from collections import deque
 class Solution:
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         res = []
-        self.helper(root, res)
+        stack = []
+        curr = root
+        while curr or stack:
+            while curr:
+                stack.append(curr)
+                curr = curr.left
+            curr = stack.pop()
+            res.append(curr.val)
+            curr = curr.right
         return res
-
-    def helper(self, root: Optional[TreeNode], res: list[int]) -> list[int]:
-        if not root:
-            return root
-        self.helper(root.left, res)
-        res.append(root.val)
-        self.helper(root.right, res)
