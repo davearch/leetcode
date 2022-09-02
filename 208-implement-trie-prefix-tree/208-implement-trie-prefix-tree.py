@@ -23,7 +23,6 @@ class Trie:
     def __init__(self):
         self.root = TrieNode()
         
-
     def insert(self, word: str) -> None:
         node = self.root
         for i in range(len(word)):
@@ -33,7 +32,6 @@ class Trie:
             node = node.get(currentChar)
         node.setEnd()
         
-
     def searchPrefix(self, word: str) -> TrieNode:
         node = self.root
         for i in range(len(word)):
@@ -44,8 +42,6 @@ class Trie:
                 return None
         return node
 
-    
-    
     def search(self, word: str) -> bool:
         node = self.searchPrefix(word)
         return node is not None and node.isEndFunc()
@@ -53,26 +49,6 @@ class Trie:
     def startsWith(self, prefix: str) -> bool:
         node = self.searchPrefix(prefix)
         return node is not None
-        
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
 
 # Your Trie object will be instantiated and called as such:
