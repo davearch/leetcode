@@ -1,4 +1,4 @@
-class TrieNode:
+class Node:
     def __init__(self):
         self.links = [None for _ in range(26)]
         self.isEnd = False
@@ -6,51 +6,59 @@ class TrieNode:
     def containsKey(self, ch: str) -> bool:
         return self.links[ord(ch) - ord('a')] != None
     
-    def get(self, ch: str) -> 'TrieNode':
+    def getKey(self, ch: str) -> 'Node':
         return self.links[ord(ch) - ord('a')]
     
-    def put(self, ch: str, node: 'TrieNode') -> None:
+    def setKey(self, ch: str, node: 'Node') -> None:
         self.links[ord(ch) - ord('a')] = node
     
-    def setEnd(self) -> None:
+    def setEnd(self):
         self.isEnd = True
-    
-    def isEndFunc(self) -> bool:
+
+    def isEndFunc(self):
         return self.isEnd
-    
+
 class Trie:
 
     def __init__(self):
-        self.root = TrieNode()
+        self.root = Node()
         
     def insert(self, word: str) -> None:
         node = self.root
         for i in range(len(word)):
-            currentChar = word[i]
-            if not node.containsKey(currentChar):
-                node.put(currentChar, TrieNode())
-            node = node.get(currentChar)
+            curr = word[i]
+            if not node.containsKey(curr):
+                node.setKey(curr, Node())
+            node = node.getKey(curr)
         node.setEnd()
-        
-    def searchPrefix(self, word: str) -> TrieNode:
+
+    def searchPrefix(self, word: str) -> 'Node':
         node = self.root
         for i in range(len(word)):
-            curLetter = word[i]
-            if node.containsKey(curLetter):
-                node = node.get(curLetter)
-            else:
+            curr = word[i]
+            if not node.containsKey(curr):
                 return None
+            else:
+                node = node.getKey(curr)
         return node
-
+    
     def search(self, word: str) -> bool:
         node = self.searchPrefix(word)
         return node is not None and node.isEndFunc()
-
+        
     def startsWith(self, prefix: str) -> bool:
         node = self.searchPrefix(prefix)
         return node is not None
-        
 
+
+        
+        
+        
+        
+        
+        
+        
+        
 # Your Trie object will be instantiated and called as such:
 # obj = Trie()
 # obj.insert(word)
