@@ -36,37 +36,3 @@ class Solution:
             else:
                 right = pivot -1
         return (2**d - 1) + left
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
