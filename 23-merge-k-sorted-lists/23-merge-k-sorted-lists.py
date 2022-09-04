@@ -3,7 +3,7 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-from queue import PriorityQueue
+import heapq
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         class Wrapper:
@@ -11,21 +11,20 @@ class Solution:
                 self.node = node
             def __lt__(self, other):
                 return self.node.val < other.node.val
-
+        
         if not lists:
-            return None
-        q = PriorityQueue()
+            return
+        minheap = []
         for l in lists:
             if l:
-                q.put(Wrapper(l))
-        
+                heapq.heappush(minheap, Wrapper(l))
         head = point = ListNode()
-        while not q.empty():
-            node = q.get().node
-            point.next = node
-            point = point.next
-            node = node.next
-            if node:
-                q.put(Wrapper(node))
+        while minheap:
+            curr = heapq.heappop(minheap).node
+            if curr:
+                point.next = curr
+                point = curr
+                if curr.next:
+                    heapq.heappush(minheap, Wrapper(curr.next))
         return head.next
             
