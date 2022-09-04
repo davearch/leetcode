@@ -6,19 +6,16 @@
 #         self.right = right
 class Solution:
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
         result = []
+        stack = []
         curr = root
-        pre = TreeNode
-        while curr:
-            if not curr.left:
-                result.append(curr.val)
-                curr = curr.right
-            else:
-                pre = curr.left
-                while pre.right:
-                    pre = pre.right
-                pre.right = curr
-                temp = curr
+        while curr or stack:
+            while curr:
+                stack.append(curr)
                 curr = curr.left
-                temp.left = None
+            curr = stack.pop()
+            result.append(curr.val)
+            curr = curr.right
         return result
