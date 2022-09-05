@@ -6,7 +6,7 @@ class Solution:
                 result.append(nums[:])
                 return
             for i in range(first, n):
-                nums[i], nums[first] = nums[first], nums[i]
+                nums[i],nums[first] = nums[first], nums[i]
                 backtrack(first+1)
                 nums[i], nums[first] = nums[first], nums[i]
         result = []
