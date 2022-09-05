@@ -1,4 +1,3 @@
-from collections import deque
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
         letters = {
@@ -8,20 +7,16 @@ class Solution:
         }
         if not digits:
             return []
-        q = deque([])
-        q.append([])
+        n = len(digits)
         result = []
-        for i in range(len(digits)):
-            n = len(q)
-            for j in range(n):
-                curr_digit = digits[i]
-                possible_letters = letters[curr_digit]
-                old_combo = q.popleft()
-                for letter in possible_letters:
-                    new_combo = list(old_combo)
-                    new_combo.append(letter)
-                    if len(new_combo) == len(digits):
-                        result.append(''.join(new_combo))
-                    else:
-                        q.append(''.join(new_combo))
+        def helper(index, path):
+            if len(path) == len(digits):
+                result.append(''.join(path))
+                return
+            possible_letters = letters[digits[index]]
+            for letter in possible_letters:
+                path.append(letter)
+                helper(index+1, path)
+                path.pop()
+        helper(0, [])
         return result
