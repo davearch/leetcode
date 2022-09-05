@@ -1,18 +1,14 @@
-from collections import deque
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
+        n = len(nums)
+        def backtrack(first = 0):
+            if first == len(nums):
+                result.append(nums[:])
+                return
+            for i in range(first, n):
+                nums[i],nums[first] = nums[first],nums[i]
+                backtrack(first+1)
+                nums[i],nums[first] = nums[first],nums[i]
         result = []
-        q = deque([])
-        q.append([])
-        for num in nums:
-            n = len(q)
-            for _ in range(n):
-                old_perm = q.popleft()
-                for j in range(len(old_perm)+1):
-                    new = list(old_perm)
-                    new.insert(j, num)
-                    if len(new) == len(nums):
-                        result.append(new)
-                    else:
-                        q.append(new)
+        backtrack()
         return result
