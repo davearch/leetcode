@@ -9,6 +9,7 @@ class Solution:
             return head
         
         sentinel = ListNode(0, head)
+        
         prev, curr = sentinel, head
         while curr:
             if curr.val == val:
