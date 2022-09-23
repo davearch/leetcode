@@ -4,7 +4,7 @@ class Solution:
         Do not return anything, modify nums in-place instead.
         """
         p0 = curr = 0
-        p2 = len(nums) - 1
+        p2 = len(nums) -1
         while curr <= p2:
             if nums[curr] == 0:
                 nums[p0], nums[curr] = nums[curr], nums[p0]
