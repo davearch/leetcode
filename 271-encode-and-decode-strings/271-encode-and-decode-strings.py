@@ -1,8 +1,6 @@
 class Codec:
-
     def encode(self, strs):
         return ''.join('%d:' % len(s) + s for s in strs)
-
     def decode(self, s):
         strs = []
         i = 0
@@ -11,8 +9,6 @@ class Codec:
             i = j + 1 + int(s[i:j])
             strs.append(s[j+1:i])
         return strs
-        
-
 
 # Your Codec object will be instantiated and called as such:
 # codec = Codec()
