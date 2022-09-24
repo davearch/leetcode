@@ -2,7 +2,6 @@ class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         output = set()
         nums.sort()
-        print(nums)
         for i in range(len(nums)):
             j = i+1
             k = len(nums) -1
