@@ -1,13 +1,12 @@
+import re
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        left, right = 0, len(s) -1
-        while left < right:
-            while left < right and not s[left].isalnum():
-                left += 1
-            while left < right and not s[right].isalnum():
-                right -= 1
-            if s[left].lower() != s[right].lower():
+        s = re.sub('[^A-Za-z0-9]+', '', s).lower()
+        
+        lo, hi = 0, len(s) -1
+        while lo < hi:
+            if s[lo] != s[hi]:
                 return False
-            left += 1
-            right -= 1
+            lo += 1
+            hi -= 1
         return True
