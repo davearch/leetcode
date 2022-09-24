@@ -32,4 +32,4 @@ class Solution:
         output = []
         for k, v in sortedWordToListOfAnagrams.items():
             output.append(v)
-        return output
+        return sortedWordToListOfAnagrams.values()
