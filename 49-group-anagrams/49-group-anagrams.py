@@ -29,7 +29,4 @@ class Solution:
                 sortedWordToListOfAnagrams[sorted_word].append(word)
             else:
                 sortedWordToListOfAnagrams[sorted_word] = [word]
-        output = []
-        for k, v in sortedWordToListOfAnagrams.items():
-            output.append(v)
         return sortedWordToListOfAnagrams.values()
