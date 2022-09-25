@@ -1,15 +1,7 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        endCounts = {
-            ')': 0,
-            '}': 0,
-            ']': 0,
-        }
-        openToClose = {
-            '(': ')',
-            '{': '}',
-            '[': ']',
-        }
+        endCounts = {')': 0, '}': 0, ']': 0}
+        openToClose = {'(': ')', '{': '}', '[': ']'}
         closes = []
         for i in range(len(s) -1,-1,-1):
             if s[i] in endCounts.keys():
