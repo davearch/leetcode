@@ -1,16 +1,23 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        stack = []
-        closeToOpen = {
-            ')': '(',
-            '}': '{',
-            ']': '['
+        endCounts = {
+            ')': 0,
+            '}': 0,
+            ']': 0,
         }
-        for char in s:
-            if char in closeToOpen:
-                top_element = stack.pop() if stack else '#'
-                if closeToOpen[char] != top_element:
-                    return False
+        openToClose = {
+            '(': ')',
+            '{': '}',
+            '[': ']',
+        }
+        closes = []
+        for i in range(len(s) -1,-1,-1):
+            if s[i] in endCounts.keys():
+                closes.append(s[i])
             else:
-                stack.append(char)
-        return not stack
+                if not closes:
+                    return False
+                closer = closes.pop()
+                if openToClose[s[i]] != closer:
+                    return False
+        return True if not closes else False
