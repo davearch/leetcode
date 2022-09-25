@@ -65,17 +65,3 @@ class Solution:
         nextHighest: {11: None, 10: None, 9: 2, 8: 2, 7: None, 6: 3, 5: 3, 4: 3, 3: 3, 2: 3, 1: 3, 0: 3}
         """
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
