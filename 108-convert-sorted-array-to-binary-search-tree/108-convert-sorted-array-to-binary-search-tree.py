@@ -8,7 +8,7 @@ class Solution:
     def helper(self, nums, lo, hi):
         if lo > hi:
             return None
-        mid = (lo + hi) // 2
+        mid = lo + (hi - lo) // 2
         node = TreeNode(nums[mid])
         node.left = self.helper(nums, lo, mid-1)
         node.right = self.helper(nums, mid+1, hi)
