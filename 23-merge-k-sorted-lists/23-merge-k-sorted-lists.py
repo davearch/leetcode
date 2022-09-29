@@ -11,12 +11,9 @@ class Solution:
                 if LL:
                     heapq.heappush(current_head_values, LL.val)
                     lists[index] = lists[index].next
-        output = []
-        for _ in range(len(current_head_values)):
-            output.append(heapq.heappop(current_head_values))
         sentinel = ListNode(0)
         curr = sentinel
-        for i in output:
-            curr.next = ListNode(i)
+        for _ in range(len(current_head_values)):
+            curr.next = ListNode(heapq.heappop(current_head_values))
             curr = curr.next
         return sentinel.next
