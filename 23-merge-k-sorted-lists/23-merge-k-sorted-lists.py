@@ -3,28 +3,20 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-import heapq
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-        class Wrapper:
-            def __init__(self, node):
-                self.node = node
-            def __lt__(self, other):
-                return self.node.val < other.node.val
-        
-        if not lists:
-            return
-        minheap = []
-        for l in lists:
-            if l:
-                heapq.heappush(minheap, Wrapper(l))
-        head = point = ListNode()
-        while minheap:
-            curr = heapq.heappop(minheap).node
-            if curr:
-                point.next = curr
-                point = curr
-                if curr.next:
-                    heapq.heappush(minheap, Wrapper(curr.next))
-        return head.next
-            
+        current_head_values = []
+        while any(lists):
+            for index, LL in enumerate(lists):
+                if LL:
+                    heapq.heappush(current_head_values, LL.val)
+                    lists[index] = lists[index].next
+        output = []
+        for _ in range(len(current_head_values)):
+            output.append(heapq.heappop(current_head_values))
+        sentinel = ListNode(0)
+        curr = sentinel
+        for i in output:
+            curr.next = ListNode(i)
+            curr = curr.next
+        return sentinel.next
