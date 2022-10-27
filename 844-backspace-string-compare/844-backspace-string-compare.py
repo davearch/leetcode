@@ -1,11 +1,12 @@
-class Solution(object):
-    def backspaceCompare(self, S, T):
-        def build(S):
-            ans = []
-            for c in S:
-                if c != '#':
-                    ans.append(c)
-                elif ans:
-                    ans.pop()
-            return "".join(ans)
-        return build(S) == build(T)
+class Solution:
+    def backspaceCompare(self, s: str, t: str) -> bool:
+        def helper(S: str):
+            skip = 0
+            for x in reversed(S):
+                if x == "#":
+                    skip += 1
+                elif skip:
+                    skip -= 1
+                else:
+                    yield x
+        return all(x == y for x, y in itertools.zip_longest(helper(s), helper(t)))
