@@ -1,29 +1,31 @@
 class Solution:
     def matrixBlockSum(self, mat: List[List[int]], k: int) -> List[List[int]]:
-        if not mat:
-            return []
+        m = len(mat)
+        n = len(mat[0])
         
-        memo = {}
-        ans = [[-1 for _ in range(len(mat[0]))] for _ in range(len(mat))]
-        I_TOP_BOUND = 0
-        I_LOWER_BOUND = len(mat)-1
-        J_LEFT_BOUND = 0
-        J_RIGHT_BOUND = len(mat[0]) -1
-        for i in range(len(mat)):
-            i_range = (max(I_TOP_BOUND, i-k), min(I_LOWER_BOUND, i+k))
-            for j in range(len(mat[i])):
-                curr_char = mat[i][j]
-                j_range = (max(J_LEFT_BOUND, j-k), min(J_RIGHT_BOUND, j+k))
-                _sum = 0
-                curr_range = (i_range, j_range)
-                if curr_range in memo:
-                    _sum = memo[curr_range]
-                    ans[i][j] = _sum
-                    continue
-                else:
-                    for r in range(i_range[0], i_range[1]+1):
-                        for c in range(j_range[0], j_range[1]+1):
-                            _sum += mat[r][c]
-                memo[curr_range] = _sum
-                ans[i][j] = _sum
+        prefix_sum = [[0] * (n+1) for _ in range(m+1)]
+        
+        # build 2D prefix_sum
+        for i in range(1, m+1):
+            for j in range(1, n+1):
+                prefix_sum[i][j] = mat[i-1][j-1] + \
+                    prefix_sum[i-1][j] + \
+                    prefix_sum[i][j-1] - \
+                    prefix_sum[i-1][j-1]
+        
+        ans = [[0] * n for _ in range(m)]
+        
+        for i in range(1, m+1):
+            for j in range(1, n+1):
+                end_i = min(m, i+k)
+                end_j = min(n, j+k)
+                
+                start_i = max(1, i-k)
+                start_j = max(1, j-k)
+                
+                ans[i-1][j-1] = prefix_sum[end_i][end_j] - \
+                    prefix_sum[start_i-1][end_j] - \
+                    prefix_sum[end_i][start_j-1] + \
+                    prefix_sum[start_i-1][start_j-1]
+
         return ans
